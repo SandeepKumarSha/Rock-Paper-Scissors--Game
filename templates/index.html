@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro-Neon Rock Paper Scissors Arena</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="stars-bg"></div>
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <h1 class="glow-text">NEON ARENA</h1>
+            <p class="subtitle">ROCK • PAPER • SCISSORS</p>
+        </header>
+
+        <!-- Configuration Bar -->
+        <section class="config-bar glass-panel">
+            <div class="mode-selector">
+                <span class="label">GAME MODE</span>
+                <div class="btn-group">
+                    <button class="mode-btn active" data-mode="endless">ENDLESS</button>
+                    <button class="mode-btn" data-mode="bo3">BEST OF 3</button>
+                    <button class="mode-btn" data-mode="bo5">BEST OF 5</button>
+                </div>
+            </div>
+            
+            <div class="audio-control">
+                <button id="sound-toggle" class="icon-btn" title="Toggle Sound">
+                    <span class="sound-icon">🔊</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard glass-panel">
+            <div class="score-card player-score-card">
+                <span class="player-name">PLAYER</span>
+                <span id="player-score" class="score-num">0</span>
+            </div>
+            <div class="score-card tie-score-card">
+                <span class="player-name">TIES</span>
+                <span id="ties-score" class="score-num">0</span>
+            </div>
+            <div class="score-card computer-score-card">
+                <span class="player-name">CPU</span>
+                <span id="computer-score" class="score-num">0</span>
+            </div>
+        </section>
+
+        <!-- Series Status (Hidden in Endless Mode) -->
+        <div id="series-status" class="series-status-text" style="display: none;">
+            First to <span id="target-wins">2</span> wins
+        </div>
+
+        <!-- Main Battlefield / Arena -->
+        <section class="battlefield">
+            <!-- Player Hand Card -->
+            <div class="hand-card-wrapper">
+                <div class="card-label">YOUR CHOICE</div>
+                <div id="player-card" class="hand-card glass-panel idle">
+                    <div class="emoji-display" id="player-emoji">✊</div>
+                    <div class="choice-name" id="player-choice-name">Ready</div>
+                </div>
+            </div>
+
+            <!-- Vs Indicator -->
+            <div class="vs-badge">VS</div>
+
+            <!-- Computer Hand Card -->
+            <div class="hand-card-wrapper">
+                <div class="card-label">CPU CHOICE</div>
+                <div id="computer-card" class="hand-card glass-panel idle">
+                    <div class="emoji-display" id="computer-emoji">✊</div>
+                    <div class="choice-name" id="computer-choice-name">Ready</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Result Announcement Banner -->
+        <div id="result-banner" class="result-banner">
+            Select your weapon to begin!
+        </div>
+
+        <!-- Input / Action Buttons -->
+        <section class="weapon-controls">
+            <button class="weapon-btn rock" data-choice="r" id="btn-rock">
+                <span class="weapon-emoji">🪨</span>
+                <span class="weapon-label">ROCK</span>
+            </button>
+            <button class="weapon-btn paper" data-choice="p" id="btn-paper">
+                <span class="weapon-emoji">📃</span>
+                <span class="weapon-label">PAPER</span>
+            </button>
+            <button class="weapon-btn scissors" data-choice="s" id="btn-scissors">
+                <span class="weapon-emoji">✂️</span>
+                <span class="weapon-label">SCISSORS</span>
+            </button>
+        </section>
+
+        <!-- Footer / Reset Section -->
+        <footer class="game-footer">
+            <button id="reset-btn" class="secondary-btn">RESET GAME</button>
+        </footer>
+
+        <!-- History Timeline -->
+        <section class="history-section glass-panel">
+            <h3>BATTLE LOG</h3>
+            <div id="history-timeline" class="history-timeline">
+                <p class="empty-history">No rounds played yet. Choose a weapon above!</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Series Game Over Modal Overlay -->
+    <div id="game-over-modal" class="modal-overlay">
+        <div class="modal-content glass-panel glow-border-win">
+            <h2 id="modal-title" class="modal-title glow-text-win">VICTORY!</h2>
+            <div class="modal-body">
+                <p id="modal-message">You have conquered the CPU in the Series!</p>
+                <div class="modal-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">FINAL SCORE</span>
+                        <span id="modal-score" class="stat-value">2 - 1</span>
+                    </div>
+                </div>
+            </div>
+            <button id="modal-restart-btn" class="primary-btn">PLAY AGAIN</button>
+        </div>
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <!-- Main Game Script -->
+    <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+</body>
+</html>
