@@ -5,7 +5,12 @@ A highly polished, premium web-based Rock Paper Scissors game featuring a gorgeo
 The project also includes a classic CLI/terminal version for quick command-line gameplay.
 
 ---
+## 🚀 Live Demo
 
+Play the game here:
+https://rock-paper-scissors-game-psi-three.vercel.app
+
+---
 ## 🎮 Live Game Modes
 - **Endless Arena**: Play as many rounds as you want; track player wins, CPU wins, and ties indefinitely.
 - **Best of 3 (BO3)**: First to reach 2 victories wins the series.
